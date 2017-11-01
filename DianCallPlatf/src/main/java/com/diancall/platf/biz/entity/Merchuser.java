@@ -13,7 +13,7 @@ import java.io.Serializable;
  * Date: 2017-10-30
  * Time: 20:23
  */
-public class MerchUser extends Model<MerchUser> {
+public class Merchuser extends Model<Merchuser> {
 
     @TableId(value = "merchuserid",type = IdType.AUTO)
     private int merchuserid;

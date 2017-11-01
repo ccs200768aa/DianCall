@@ -1,19 +1,23 @@
 server:
   port: 80
   context-path: /pipes
-
-  spring:
+spring:
     profiles:
-      active: dev
+          active: dev
     mvc:
-      static-path-pattern:  /static/**
+      static-path-pattern: /static/**
       view:
-        prefix: /WEB-INF/views
+        prefix: /WEB-INT/views
+##################mybatis#########
+#mybatis:
+#  mapper-locations: com/diancall/platf/biz/dao/mapper/*Mapper.xml
+#  type-aliases-package: com.diancall.platf.biz.entity
 
-#############mybatis-plus 配置######################
+
+#############mybatis-plus ######################
 mybatis-plus:
-  mapper-locations: classpath:com.diancall.platf.biz.dao.mapper.*xml
-  type-aliases-package: com.diancall.platf.biz.entity
+  mapper-locations: classpath*:mappers/*.xml
+  typeAliasesPackage: com.diancall.biz.entity
   global-config:
     id-type: 0
     db-column-underline: false
@@ -21,19 +25,44 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     cache-enabled: true
-    lazy-loading-enabled: true
-    multiple-result-sets-enabled: true
+    lazyLoadingEnabled: true
+    multipleResultSetsEnabled: true
+
+logging:
+  level:
+    com.diancall.biz: debug
+  file: logs/platf.log
+
+  cust:
+    dev:
+      datasource:
+        url: jdbc:mysql://127.0.0.1:3306/diancallplatf?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+        username: root
+        password:
+    pro:
+      datasource:
+        url: jdbc:mysql://127.0.0.1:3306/diancallplatf?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+        username: root
+        password:
 
 ---
-############开发环境############
+############dev############
 spring:
   profiles: dev
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/diancallplatf?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+---
+###############pro################
+
+spring:
+  profiles: pro
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/diancallplatf?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
     username: root
     password: Aa123456
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
----
-
-

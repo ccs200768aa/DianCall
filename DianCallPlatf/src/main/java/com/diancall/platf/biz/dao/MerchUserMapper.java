@@ -1,9 +1,7 @@
 package com.diancall.platf.biz.dao;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.diancall.platf.biz.entity.MerchUser;
-import org.springframework.stereotype.Component;
+import com.diancall.platf.biz.SuperMapper;
+import com.diancall.platf.biz.entity.Merchuser;
 
-@Component
-public interface MerchUserMapper extends BaseMapper<MerchUser> {
+public interface MerchUserMapper extends SuperMapper<Merchuser> {
 }
