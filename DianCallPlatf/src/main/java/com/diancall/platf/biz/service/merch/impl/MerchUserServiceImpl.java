@@ -1,8 +1,8 @@
-package com.diancall.platf.biz.service.impl;
+package com.diancall.platf.biz.service.merch.impl;
 
-import com.diancall.platf.biz.dao.MerchUserMapper;
-import com.diancall.platf.biz.entity.Merchuser;
-import com.diancall.platf.biz.service.MerchUserServiceI;
+import com.diancall.platf.biz.dao.merch.MerchUserMapper;
+import com.diancall.platf.biz.entity.merch.Merchuser;
+import com.diancall.platf.biz.service.merch.MerchUserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

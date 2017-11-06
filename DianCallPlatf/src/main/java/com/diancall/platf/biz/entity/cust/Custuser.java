@@ -1,4 +1,4 @@
-package com.diancall.platf.biz.entity;
+package com.diancall.platf.biz.entity.cust;
 
 import com.baomidou.mybatisplus.activerecord.Model;
 import com.baomidou.mybatisplus.annotations.TableId;
@@ -8,17 +8,14 @@ import java.io.Serializable;
 
 /**
  * Created with IntelliJ IDEA.
- * Description:商家版用户
+ * Description:
  * User: Tiki
- * Date: 2017-10-30
- * Time: 20:23
+ * Date: 2017-11-02
+ * Time: 14:56
  */
-public class Merchuser extends Model<Merchuser> {
-
-    @TableId(value = "merchuserid",type = IdType.AUTO)
-    private int merchuserid;
-
-    private int merchid;
+public class Custuser extends Model<Custuser> {
+    @TableId(value = "custuserid", type = IdType.AUTO)
+    private int custuserid;
 
     private String account;
 
@@ -30,20 +27,12 @@ public class Merchuser extends Model<Merchuser> {
 
     private long createtime;
 
-    public int getMerchuserid() {
-        return merchuserid;
+    public int getCustuserid() {
+        return custuserid;
     }
 
-    public void setMerchuserid(int merchuserid) {
-        this.merchuserid = merchuserid;
-    }
-
-    public int getMerchid() {
-        return merchid;
-    }
-
-    public void setMerchid(int merchid) {
-        this.merchid = merchid;
+    public void setCustuserid(int custuserid) {
+        this.custuserid = custuserid;
     }
 
     public String getAccount() {
@@ -88,6 +77,6 @@ public class Merchuser extends Model<Merchuser> {
 
     @Override
     protected Serializable pkVal() {
-        return this.merchid;
+        return this.custuserid;
     }
 }

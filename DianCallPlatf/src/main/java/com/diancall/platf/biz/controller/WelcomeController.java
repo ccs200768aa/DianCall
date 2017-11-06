@@ -2,8 +2,9 @@ package com.diancall.platf.biz.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.diancall.core.retcodes.SuccRetCode;
-import com.diancall.platf.biz.entity.Merchuser;
-import com.diancall.platf.biz.service.MerchUserServiceI;
+import com.diancall.platf.biz.entity.cust.Custuser;
+import com.diancall.platf.biz.service.cust.CustUserServiceI;
+import com.diancall.platf.biz.service.merch.MerchUserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +27,9 @@ public class WelcomeController {
     @Autowired
     private MerchUserServiceI merchUserService;
 
+    @Autowired
+    private CustUserServiceI custUserService;
+
     @GetMapping(path = "/q")
     public String welcome() {
         return "hello";
@@ -33,7 +37,7 @@ public class WelcomeController {
 
     @GetMapping(path = "/list")
     public String list(Model model) {
-        List<Merchuser> muList = merchUserService.queryList();
+        List<Custuser> muList = custUserService.queryList();
         model.addAttribute("retcode", new SuccRetCode());
         model.addAttribute("muList", muList);
         JSONObject jsonObject = (JSONObject) JSONObject.toJSON(model);
