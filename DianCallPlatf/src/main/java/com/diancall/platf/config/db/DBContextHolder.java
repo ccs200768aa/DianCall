@@ -11,7 +11,8 @@ public class DBContextHolder {
     private static final ThreadLocal<String> contextHolder = new ThreadLocal<>();
 
     public static void setDBType(DBTypeEnum dbTypeEnum) {
-        contextHolder.set(dbTypeEnum.getValue());
+        String value = dbTypeEnum.getValue();
+        contextHolder.set(value);
     }
 
     public static String getDBType() {

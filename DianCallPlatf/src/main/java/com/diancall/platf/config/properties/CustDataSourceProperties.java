@@ -1,9 +1,7 @@
 package com.diancall.platf.config.properties;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -14,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * Time: 11:57
  */
 @Configuration
-@MapperScan(basePackages = "com.diancall.biz.entity.cust", sqlSessionFactoryRef = "custSqlSessionFactory")
+//@MapperScan(basePackages = "com.diancall.biz.entity.cust", sqlSessionFactoryRef = "custSqlSessionFactory")
 public class CustDataSourceProperties {
 
     @Value("${cust.datasource.url}")
@@ -24,17 +22,26 @@ public class CustDataSourceProperties {
     private String username;
 
     @Value("${cust.datasource.password}")
-    private String password;
+    private String password ;
 
-    @Bean(name = "custDataSource")
-    public DruidDataSource custDataSource() {
-        DruidDataSource dataSource = new DruidDataSource();
+    public DruidDataSource config(DruidDataSource dataSource){
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl(this.url);
         dataSource.setUsername(this.username);
         dataSource.setPassword(this.password);
         return dataSource;
     }
+
+//    @Bean(name = "custDataSource")
+//    public DruidDataSource custDataSource() {
+//        DruidDataSource dataSource = new DruidDataSource();
+//        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+//        dataSource.setUrl(this.url);
+//        dataSource.setUsername(this.username);
+//        dataSource.setPassword(this.password);
+//        System.out.println(this.url);
+//        return dataSource;
+//    }
 
 /*    @Bean(name = "custTransactionManager")
     public DataSourceTransactionManager transactionManager() {
@@ -48,4 +55,6 @@ public class CustDataSourceProperties {
         bean.setMapperLocations(new PathMatchingResourcePatternResolver().getResources("classpath:mappers/cust/*.xml"));
         return bean.getObject();
     }*/
+
+
 }

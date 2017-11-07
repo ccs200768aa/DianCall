@@ -1,3 +1,6 @@
+spring:
+  profiles: dev
+
 cust:
     datasource:
       url: jdbc:mysql://127.0.0.1:3306/diancall_cust?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
@@ -10,5 +13,3 @@ merch:
       username: root
       password:
 
-spring:
-  profiles: dev
