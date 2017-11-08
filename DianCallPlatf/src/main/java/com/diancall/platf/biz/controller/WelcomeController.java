@@ -9,6 +9,7 @@ import com.diancall.platf.biz.service.merch.MerchUserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,8 +37,8 @@ public class WelcomeController {
         return "hello";
     }
 
-    @GetMapping(path = "/list")
-    public String list(Model model) {
+    @GetMapping(path = "/querycustuser")
+    public String querycustuser(Model model) {
         List<Custuser> muList = custUserService.queryList();
         model.addAttribute("retcode", new SuccRetCode());
         model.addAttribute("muList", muList);
@@ -45,8 +46,17 @@ public class WelcomeController {
         return jsonObject.toJSONString();
     }
 
-    @GetMapping(path = "/merchList")
-    public String merchList(Model model) {
+    @GetMapping(path = "/findcustuser/{id}")
+    public String findcustuser(@PathVariable("id") int id, Model model) {
+        Custuser custuser = custUserService.findById(id);
+        model.addAttribute("retcode", new SuccRetCode());
+        model.addAttribute("muList", custuser);
+        JSONObject jsonObject = (JSONObject) JSONObject.toJSON(model);
+        return jsonObject.toJSONString();
+    }
+
+    @GetMapping(path = "/querymerchuser")
+    public String querymerchuser(Model model) {
         List<Merchuser> muList = merchUserService.queryList();
         model.addAttribute("retcode", new SuccRetCode());
         model.addAttribute("muList", muList);

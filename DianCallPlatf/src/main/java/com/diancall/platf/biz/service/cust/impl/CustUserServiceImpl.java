@@ -9,6 +9,7 @@ import com.diancall.platf.config.db.DBTypeEnum;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -29,5 +30,11 @@ public class CustUserServiceImpl implements CustUserServiceI {
     public List<Custuser> queryList() {
         String dbType = DBContextHolder.getDBType();
         return custUserMapper.selectByMap(null);
+    }
+
+    @Override
+    @DataSource(name = "custDataSource")
+    public Custuser findById(Serializable id) {
+        return custUserMapper.selectById(id);
     }
 }
