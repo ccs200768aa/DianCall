@@ -36,7 +36,7 @@ public class CustUserAspect {
     private CustUserServiceI custUserService;
 
 
-    @Pointcut(value = "execution(* com.diancall.platf..controller.*.query*(..))")
+    @Pointcut(value = "execution(* com.diancall.platf..controller.cust.*.query*(..))")
     public void cut(){};
 
     @Around("cut()")

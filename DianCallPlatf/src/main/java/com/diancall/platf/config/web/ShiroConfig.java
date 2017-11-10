@@ -1,19 +1,16 @@
 package com.diancall.platf.config.web;
 
-import com.diancall.platf.biz.shiro.ShiroDBRealm;
+import com.diancall.platf.biz.shiro.MerchUserRealm;
 import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
-import org.apache.shiro.web.filter.mgt.DefaultFilter;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
-import java.util.Base64;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -34,7 +31,7 @@ public class ShiroConfig {
      * @return
      */
     @Bean
-    public CacheManager getCacheShiroManager(EhCacheManagerFactoryBean ehcache) {
+    public ShiroRedis getCacheShiroManager(EhCacheManagerFactoryBean ehcache) {
         EhCacheManager ehCacheManager = new EhCacheManager();
         ehCacheManager.setCacheManager(ehcache.getObject());
         return ehCacheManager;
@@ -73,8 +70,8 @@ public class ShiroConfig {
      * @return
      */
     @Bean
-    public ShiroDBRealm shiroDBRealm() {
-        return new ShiroDBRealm();
+    public MerchUserRealm merchUserRealm() {
+        return new MerchUserRealm();
     }
 
     /**
@@ -85,7 +82,7 @@ public class ShiroConfig {
     @Bean
     public DefaultWebSecurityManager securityManager(CookieRememberMeManager rememberMeManager, CacheManager cacheManager, SessionManager sessionManager) {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        securityManager.setRealm(this.shiroDBRealm());
+        securityManager.setRealm(this.merchUserRealm());
         securityManager.setRememberMeManager(rememberMeManager);
         securityManager.setCacheManager(cacheManager);
         securityManager.setSessionManager(sessionManager);
