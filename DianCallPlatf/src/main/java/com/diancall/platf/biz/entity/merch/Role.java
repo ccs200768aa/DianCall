@@ -1,6 +1,8 @@
 package com.diancall.platf.biz.entity.merch;
 
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
 
 import java.io.Serializable;
 
@@ -13,6 +15,7 @@ import java.io.Serializable;
  */
 public class Role extends Model<Role> {
 
+    @TableId(value = "roleid",type = IdType.AUTO)
     private Integer roleid;
 
     private String name;

@@ -1,6 +1,8 @@
 package com.diancall.platf.biz.entity.merch;
 
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
 
 import java.io.Serializable;
 
@@ -13,7 +15,8 @@ import java.io.Serializable;
  */
 public class Permission extends Model<Permission> {
 
-    private Integer id;
+    @TableId(value = "permissionid", type = IdType.AUTO)
+    private Integer permissionid;
 
     private String name;
 
@@ -23,12 +26,12 @@ public class Permission extends Model<Permission> {
 
     private String description;
 
-    public Integer getId() {
-        return id;
+    public Integer getPermissionid() {
+        return permissionid;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setPermissionid(Integer permissionid) {
+        this.permissionid = permissionid;
     }
 
     public String getName() {
@@ -65,6 +68,6 @@ public class Permission extends Model<Permission> {
 
     @Override
     protected Serializable pkVal() {
-        return this.id;
+        return this.permissionid;
     }
 }

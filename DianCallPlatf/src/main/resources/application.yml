@@ -5,9 +5,10 @@ spring:
     profiles:
           active: dev
     mvc:
-      static-path-pattern: /static/**
+      static-path-pattern: /WEB-INF/static/**
       view:
-        prefix: /WEB-INT/views
+        prefix: /WEB-INF/
+#        suffix: .ftl
     jackson:
       date-format: yyyy-MM-dd HH:mm:ss
 ##################mybatis#########
@@ -33,4 +34,6 @@ mybatis-plus:
 logging:
   level:
     com.diancall.biz: debug
+    com.diancall.biz.dao.merch: debug
+    com.ibatis: debug
   file: logs/platf.log

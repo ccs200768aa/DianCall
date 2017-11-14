@@ -10,4 +10,8 @@ package com.diancall.core.constant;
 public class StringConstant {
 
     public final static String HYPHEN = "-";
+
+    public final static String COMMA = ",";
+
+    public  final static String MD5 = "MD5";
 }

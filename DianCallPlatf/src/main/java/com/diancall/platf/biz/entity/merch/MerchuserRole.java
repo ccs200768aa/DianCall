@@ -1,6 +1,8 @@
 package com.diancall.platf.biz.entity.merch;
 
 import com.baomidou.mybatisplus.activerecord.Model;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.enums.IdType;
 
 import java.io.Serializable;
 
@@ -12,7 +14,7 @@ import java.io.Serializable;
  * Time: 10:26
  */
 public class MerchuserRole extends Model<MerchuserRole> {
-
+    @TableId(value = "merchuserroleid",type = IdType.AUTO)
     private Integer merchuserroleid;
 
     private Integer merchuserid;

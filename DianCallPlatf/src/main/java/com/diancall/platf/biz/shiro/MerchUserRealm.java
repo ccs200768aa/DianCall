@@ -23,23 +23,35 @@ public class MerchUserRealm extends AuthorizingRealm {
     @Autowired
     private MerchUserServiceI merchUserService;
 
+    /**
+     * 授权验证
+     * @param principalCollection
+     * @return
+     */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        String userName = (String)principalCollection.getPrimaryPrincipal();
+        String userName = (String) principalCollection.getPrimaryPrincipal();
         SimpleAuthorizationInfo sa = new SimpleAuthorizationInfo();
         sa.setStringPermissions(merchUserService.findPermissionWithUserName(userName));
+        sa.addRoles(merchUserService.findRoleWithUserName(userName));
         return sa;
     }
 
+    /**
+     * 登陆验证
+     * @param authenticationToken
+     * @return
+     * @throws AuthenticationException
+     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken upt = (UsernamePasswordToken) authenticationToken;
         String userName = upt.getUsername();
         Merchuser mu = merchUserService.findMerchuserByName(userName);
-        if(null == mu){
+        if (null == mu) {
             throw new UnknownAccountException();
         }
-        SimpleAuthenticationInfo sa = new SimpleAuthenticationInfo(userName,mu.getAccount(),mu.getPassword());
+        SimpleAuthenticationInfo sa = new SimpleAuthenticationInfo(userName, mu.getAccount(), mu.getPassword());
         return sa;
     }
 }

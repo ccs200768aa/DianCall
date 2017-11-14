@@ -23,7 +23,13 @@ public interface MerchUserServiceI {
 
     List<Permission> queryPermissionListWithId(int merchuserid);
 
+    Set<String> findRoleWithUserName(String userName);
+
+    Set<String> findRoleWithUserId(int merchuserid);
+
     Set<String> findPermissionWithUserName(String userName);
 
     Set<String> findPermissionWithId(int merchuserid);
+
+
 }

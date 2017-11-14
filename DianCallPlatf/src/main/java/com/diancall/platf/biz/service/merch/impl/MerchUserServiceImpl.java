@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -49,9 +46,11 @@ public class MerchUserServiceImpl implements MerchUserServiceI {
     @Override
     @DataSource(name = "merchDataSource")
     public Merchuser findMerchuserByName(String userName) {
-        Merchuser mu = new Merchuser();
-        mu.setAccount(userName);
-        return merchUserMapper.selectOne(mu);
+        Map<String,Object> map = new HashMap<>();
+        map.put("account",userName);
+//        EntityWrapper<Merchuser> wrapper = new EntityWrapper<>(mu);
+        List<Merchuser> muList = merchUserMapper.selectByMap(map);
+        return muList.size()>0?muList.get(0):null;
     }
 
     @Override
@@ -130,7 +129,7 @@ public class MerchUserServiceImpl implements MerchUserServiceI {
         List<Permission> pList = queryPermissionListWithUserName(userName);
         Set<String> set = Sets.newHashSet();
         pList.forEach(permission ->
-                set.add(permission.getName());
+                set.add(permission.getName())
         );
         return set;
     }
@@ -140,9 +139,31 @@ public class MerchUserServiceImpl implements MerchUserServiceI {
     public Set<String> findPermissionWithId(int merchuserid) {
         List<Permission> pList = queryPermissionListWithId(merchuserid);
         Set<String> set = Sets.newHashSet();
-        pList.forEach(permission ->
+        pList.forEach(permission ->{
                 set.add(permission.getName());
-        );
+        });
+        return set;
+    }
+
+    @Override
+    @DataSource(name = "merchDataSource")
+    public Set<String> findRoleWithUserName(String userName) {
+        List<Role> rList = queryRoleListWithUserName(userName);
+        Set<String> set = Sets.newHashSet();
+        rList.forEach(role ->{
+            set.add(role.getName());
+        });
+        return set;
+    }
+
+    @Override
+    @DataSource(name = "merchDataSource")
+    public Set<String> findRoleWithUserId(int merchuserid) {
+        List<Role> rList = queryRoleListWithId(merchuserid);
+        Set<String> set = Sets.newHashSet();
+        rList.forEach(role ->{
+            set.add(role.getName());
+        });
         return set;
     }
 }
