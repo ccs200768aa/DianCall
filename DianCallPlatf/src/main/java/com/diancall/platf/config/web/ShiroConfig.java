@@ -2,18 +2,23 @@ package com.diancall.platf.config.web;
 
 import com.diancall.platf.biz.shiro.MerchUserRealm;
 import com.diancall.platf.biz.shiro.ShiroRedisCacheManager;
+import com.diancall.platf.config.datasource.RedisProperties;
+import org.apache.shiro.spring.LifecycleBeanPostProcessor;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.MethodInvokingFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import javax.annotation.Resource;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -33,13 +38,17 @@ public class ShiroConfig {
      * @return
      */
     @Value("${spring.redis.host}")
-    private String host;
+    private String host = "127.0.0.1";
 
     @Value("${spring.redis.password}")
-    private String password;
+    private String password = "";
 
     @Value("${spring.redis.port}")
-    private String port;
+    private int port = 6379;
+
+    @Resource
+    RedisProperties redisProperties;
+
 
     @Bean
     @DependsOn(value = "redisTemplate")
@@ -58,11 +67,12 @@ public class ShiroConfig {
     @Bean
     public JedisConnectionFactory connectionFactory() {
         JedisConnectionFactory conn = new JedisConnectionFactory();
-        conn.setDatabase(3);
+//        redisProperties.config(conn);
         conn.setHostName(this.host);
         conn.setPassword(this.password);
-        conn.setPort(Integer.valueOf(this.port));
-        conn.setTimeout(3000);
+        conn.setPort(this.port);
+        conn.setDatabase(3);
+        conn.setTimeout(30000);
         return conn;
     }
 
@@ -140,7 +150,7 @@ public class ShiroConfig {
     public ShiroFilterFactoryBean shiroFilter(DefaultWebSecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilter = new ShiroFilterFactoryBean();
         shiroFilter.setSecurityManager(securityManager);
-        shiroFilter.setLoginUrl("/merchuser/login");
+        shiroFilter.setLoginUrl("/login");
         shiroFilter.setSuccessUrl("/");
         shiroFilter.setUnauthorizedUrl("/error");
         //TODO
@@ -150,6 +160,26 @@ public class ShiroConfig {
         chainMap.put("/**", "anon");
         shiroFilter.setFilterChainDefinitionMap(chainMap);
         return shiroFilter;
+    }
+
+    @Bean
+    public MethodInvokingFactoryBean methodInvokingFactoryBean(DefaultWebSecurityManager securityManager) {
+        MethodInvokingFactoryBean bean = new MethodInvokingFactoryBean();
+        bean.setStaticMethod("org.apache.shiro.SecurityUtils.setSecurityManager");
+        bean.setArguments(new Object[]{securityManager});
+        return bean;
+    }
+
+    @Bean
+    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
+        return new LifecycleBeanPostProcessor();
+    }
+
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(DefaultWebSecurityManager securityManager) {
+        AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
+        advisor.setSecurityManager(securityManager);
+        return advisor;
     }
 
 }

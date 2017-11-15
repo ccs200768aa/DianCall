@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.diancall.core.retcodes.SuccRetCode;
 import com.diancall.platf.biz.entity.merch.Merchuser;
 import com.diancall.platf.biz.service.merch.MerchUserServiceI;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,7 @@ public class MerchUserController {
     @Resource
     private MerchUserServiceI merchUserService;
 
+    @RequiresPermissions(value = "/merchuser/querymerchuser")
     @GetMapping(value = "/querymerchuser")
     @ResponseBody
     public String queryMerchUserList(Model model) {

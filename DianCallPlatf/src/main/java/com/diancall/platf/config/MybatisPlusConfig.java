@@ -2,6 +2,7 @@ package com.diancall.platf.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import com.baomidou.mybatisplus.plugins.PaginationInterceptor;
+import com.diancall.platf.config.datasource.RedisProperties;
 import com.diancall.platf.config.db.DBTypeEnum;
 import com.diancall.platf.config.db.DynamicDataSource;
 import com.diancall.platf.config.properties.CustDataSourceProperties;
@@ -31,6 +32,9 @@ public class MybatisPlusConfig {
     @Autowired
     MerchDataSourceProperties merchDataSourceProperties;
 
+    @Autowired
+    RedisProperties redisProperties;
+
     private DruidDataSource custDataSource() {
         DruidDataSource custDataSource = custDataSourceProperties.config(new DruidDataSource());
         return custDataSource;
@@ -59,7 +63,7 @@ public class MybatisPlusConfig {
         hashMap.put(DBTypeEnum.CUST_DATA_SOURCE.getValue(), custDataSource);
         hashMap.put(DBTypeEnum.MERCH_DATA_SOURCE.getValue(), merchDataSource);
         dynamicDataSource.setTargetDataSources(hashMap);
-        dynamicDataSource.setDefaultTargetDataSource(custDataSource);
+        dynamicDataSource.setDefaultTargetDataSource(merchDataSource);
         return dynamicDataSource;
     }
 

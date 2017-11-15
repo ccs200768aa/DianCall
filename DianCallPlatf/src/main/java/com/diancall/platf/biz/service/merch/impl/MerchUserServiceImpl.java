@@ -129,7 +129,7 @@ public class MerchUserServiceImpl implements MerchUserServiceI {
         List<Permission> pList = queryPermissionListWithUserName(userName);
         Set<String> set = Sets.newHashSet();
         pList.forEach(permission ->
-                set.add(permission.getName())
+                set.add(permission.getPermissionurl())
         );
         return set;
     }
@@ -140,7 +140,7 @@ public class MerchUserServiceImpl implements MerchUserServiceI {
         List<Permission> pList = queryPermissionListWithId(merchuserid);
         Set<String> set = Sets.newHashSet();
         pList.forEach(permission ->{
-                set.add(permission.getName());
+                set.add(permission.getPermissionurl());
         });
         return set;
     }
