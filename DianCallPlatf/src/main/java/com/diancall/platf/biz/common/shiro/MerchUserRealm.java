@@ -1,4 +1,4 @@
-package com.diancall.platf.biz.shiro;
+package com.diancall.platf.biz.common.shiro;
 
 import com.diancall.platf.biz.entity.merch.Merchuser;
 import com.diancall.platf.biz.service.merch.MerchUserServiceI;

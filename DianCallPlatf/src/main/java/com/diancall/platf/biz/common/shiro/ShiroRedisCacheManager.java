@@ -1,4 +1,4 @@
-package com.diancall.platf.biz.shiro;
+package com.diancall.platf.biz.common.shiro;
 
 import org.apache.shiro.cache.AbstractCacheManager;
 import org.apache.shiro.cache.Cache;

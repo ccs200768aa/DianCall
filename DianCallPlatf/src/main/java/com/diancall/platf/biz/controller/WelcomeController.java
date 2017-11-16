@@ -5,6 +5,7 @@ import com.diancall.core.retcodes.SuccRetCode;
 import com.diancall.platf.biz.entity.cust.Custuser;
 import com.diancall.platf.biz.service.cust.CustUserServiceI;
 import com.diancall.platf.biz.service.merch.MerchUserServiceI;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,6 +32,7 @@ public class WelcomeController {
     @Autowired
     private CustUserServiceI custUserService;
 
+    @ApiOperation("欢迎")
     @GetMapping(path = "/q")
     public String welcome() {
         return "hello";
@@ -45,6 +47,7 @@ public class WelcomeController {
         return jsonObject.toJSONString();
     }
 
+    @ApiOperation("查询具体会员")
     @GetMapping(path = "/findcustuser/{id}")
     public String findcustuser(@PathVariable("id") int id, Model model) {
         Custuser custuser = custUserService.findById(id);

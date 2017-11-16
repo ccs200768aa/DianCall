@@ -8,7 +8,7 @@ import com.diancall.core.util.ToolUtils;
 import com.diancall.platf.biz.common.ReturnObject;
 import com.diancall.platf.biz.entity.merch.Merchuser;
 import com.diancall.platf.biz.service.merch.MerchUserServiceI;
-import com.diancall.platf.biz.shiro.ShiroHelper;
+import com.diancall.platf.biz.common.shiro.ShiroHelper;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;

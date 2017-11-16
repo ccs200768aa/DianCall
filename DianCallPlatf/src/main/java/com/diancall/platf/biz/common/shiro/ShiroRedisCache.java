@@ -1,4 +1,4 @@
-package com.diancall.platf.biz.shiro;
+package com.diancall.platf.biz.common.shiro;
 
 import com.diancall.core.util.SerializeUtils;
 import com.google.common.collect.Sets;

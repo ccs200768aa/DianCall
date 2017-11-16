@@ -1,4 +1,4 @@
-package com.diancall.platf.biz.aop;
+package com.diancall.platf.biz.aop.util;
 
 import com.diancall.platf.config.datasource.DataSource;
 import com.diancall.platf.config.db.DBContextHolder;
@@ -38,7 +38,6 @@ public class MultiSourceExAop {
     public Object around(ProceedingJoinPoint point) throws Throwable {
         Signature signature = point.getSignature();
         MethodSignature methodSignature = null;
-//        GenericSignature.TypeSignature typeSignature = null;
         if (!(signature instanceof MethodSignature)) {
             throw new IllegalArgumentException("该注解只能用于方法");
         }
@@ -47,6 +46,12 @@ public class MultiSourceExAop {
         Object target = point.getTarget();
         Method currentMethod = target.getClass().getMethod(methodSignature.getName(), methodSignature.getParameterTypes());
 
+//        GenericSignature.TypeSignature typeSignature = null;
+//        if (!(signature instanceof GenericSignature)) {
+//            throw new IllegalArgumentException("该注解只能用于类");
+//        }
+//        Object target = point.getTarget();
+//        Class currentClass = target.getClass();
         DataSource datasource = currentMethod.getAnnotation(DataSource.class);
         if (datasource != null) {
             if (datasource.name().equals("custDataSource")) {

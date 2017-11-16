@@ -1,7 +1,7 @@
 package com.diancall.platf.config.web;
 
-import com.diancall.platf.biz.shiro.MerchUserRealm;
-import com.diancall.platf.biz.shiro.ShiroRedisCacheManager;
+import com.diancall.platf.biz.common.shiro.MerchUserRealm;
+import com.diancall.platf.biz.common.shiro.ShiroRedisCacheManager;
 import com.diancall.platf.config.datasource.RedisProperties;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
