@@ -14,4 +14,10 @@ public class ErrRetCode extends RetCodes {
         this.retCode = retCode;
         this.retMsg = retMsg;
     }
+
+    public ErrRetCode(RetCodeEnum retCodeEnum) {
+        super();
+        this.retCode = retCodeEnum.getRetCode();
+        this.retMsg = retCodeEnum.getRetMsg();
+    }
 }

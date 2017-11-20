@@ -14,4 +14,6 @@ public class StringConstant {
     public final static String COMMA = ",";
 
     public  final static String MD5 = "MD5";
+
+    public final static String REDIRECT = "redirect:";
 }
