@@ -21,8 +21,8 @@ public class LogManager {
 
     private static LogManager logManager = new LogManager();
 
-    public LogManager me() {
-        return this.logManager;
+    public static LogManager me() {
+        return logManager;
     }
 
     public void excuteLog(TimerTask task) {

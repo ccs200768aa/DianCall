@@ -25,7 +25,7 @@ public class LogFactory {
         return loginLog;
     }
 
-    public OperationLog createOperationLog(LogType logType, Integer merchuserid,
+    public static  OperationLog createOperationLog(LogType logType, Integer merchuserid,
                                            String msg, String bussinessName, String clazzName, String methodName, LogResult logResult) {
         OperationLog ol = new OperationLog();
         ol.setLogname(bussinessName);

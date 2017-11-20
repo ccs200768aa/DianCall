@@ -11,6 +11,10 @@ import com.diancall.core.retcodes.RetCodes;
  */
 public class ReturnObject<T> {
 
+    public ReturnObject(RetCodes retCodes){
+        this.retCodes = retCodes;
+    }
+
     public ReturnObject(RetCodes retCodes, T t) {
         this.retCodes = retCodes;
         this.retObject = t;
