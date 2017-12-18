@@ -11,13 +11,13 @@ import com.diancall.core.retcodes.RetCodes;
  */
 public class ReturnObject<T> {
 
-    public ReturnObject(RetCodes retCodes){
+    public ReturnObject(RetCodes retCodes) {
         this.retCodes = retCodes;
     }
 
-    public ReturnObject(RetCodes retCodes, T t) {
+    public ReturnObject(RetCodes retCodes, T retObject) {
         this.retCodes = retCodes;
-        this.retObject = t;
+        this.retObject = retObject;
     }
 
     private RetCodes retCodes;
@@ -32,11 +32,11 @@ public class ReturnObject<T> {
         this.retCodes = retCodes;
     }
 
-    public T getT() {
+    public T getRetObject() {
         return retObject;
     }
 
-    public void setT(T retObject) {
+    public void setRetObject(T retObject) {
         this.retObject = retObject;
     }
 }
